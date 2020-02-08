@@ -1,14 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>My Awesome Interactive Integration</title>
-  <script src="https://mixercc.azureedge.net/lib/std-v0.2.js"></script>
-</head>
-<body>
-  <button id="hello-world">Hello world!</button>
-
-  <script src="./scripts.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <title>My Awesome Interactive Integration</title>
+    <script src="https://mixercc.azureedge.net/lib/std-v0.2.js"></script>
+    <link rel="stylesheet" href="css/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenMax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div v-bind:name="lastupdate">
+        <div v-if="hasteam">
+          <section class="team infinite pulse">
+            <img v-bind:src="team.img" @click="toggle" />
+          </section>
+          <section class="main">
+            <div class="board"></div>
+            <div class="deck">
+              <div class="card title" @click="clicked('^^^TEAM^^^')">
+                <div class="topline">
+                  <div class="name">{{ team.name }}</div>
+                </div>
+                <div class="channelinfo" v-html="team.info"></div>
+              </div>
+              <div
+                class="card member"
+                v-for="member in members"
+                v-bind:id="member.name"
+                @click="clicked(member.name)"
+              >
+                <div class="topline">
+                  <div class="avatar">
+                    <img v-bind:src="member.avatar" />
+                  </div>
+                  <div class="name">{{ member.name }}</div>
+                </div>
+                <div class="channelinfo">{{ member.channelinfo }}</div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <script src="./scripts.js"></script>
+  </body>
 </html>
